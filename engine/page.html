@@ -53,7 +53,7 @@ function person(pose,x,y,s,t){
  if(pose=="wallet"){const w=[(F.hL[0]+F.hR[0])/2,F.hL[1]];g+=`<rect x="${w[0]-70}" y="${w[1]-10}" width="140" height="80" rx="12" fill="#8b5a2b" stroke="${INK}" stroke-width="6"/>`;
   const mp=prog(t,1.3,2.5);if(mp>0){const mx=w[0]+mp*220,my=w[1]-mp*320+Math.sin(t*14)*16,fl=Math.abs(Math.sin(t*22));g+=`<g transform="translate(${mx},${my})"><ellipse rx="10" ry="14" fill="#6b5d4d"/><ellipse cx="-16" cy="-4" rx="18" ry="${4+10*fl}" fill="#b9ad98" stroke="${INK}" stroke-width="3"/><ellipse cx="16" cy="-4" rx="18" ry="${4+10*fl}" fill="#b9ad98" stroke="${INK}" stroke-width="3"/></g>`}}
  if(pose=="phone")g+=phone(F.hR[0]+10,F.hR[1]-20,.7);
- if(pose=="idea"){const p2=back(prog(t,.4,.4));g+=`<g transform="translate(${F.head[0]+110},${F.head[1]-120}) scale(${p2})"><circle r="44" fill="#ffd84d" stroke="${INK}" stroke-width="6"/><rect x="-18" y="40" width="36" height="26" rx="6" fill="#bbb" stroke="${INK}" stroke-width="5"/>${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180;return L([70*Math.cos(r),70*Math.sin(r)-10],[92*Math.cos(r),92*Math.sin(r)-10],6)}).join("")}</g>`}
+ if(pose=="idea"){const p2=back(prog(t,.4,.4));g+=`<g transform="translate(${F.head[0]+150},${F.head[1]-40}) scale(${p2*.8})"><circle r="44" fill="#ffd84d" stroke="${INK}" stroke-width="6"/><rect x="-18" y="40" width="36" height="26" rx="6" fill="#bbb" stroke="${INK}" stroke-width="5"/>${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180;return L([70*Math.cos(r),70*Math.sin(r)-10],[92*Math.cos(r),92*Math.sin(r)-10],6)}).join("")}</g>`}
  return {svg:g,F};
 }
 
@@ -110,7 +110,7 @@ const SCENES={
   return ground()+g+b1.g+b2.g;},
  // {title, lines[], pose, prop}
  text:(s,t)=>{const b=block([s.title],420,s.size||86,.1,t);const b2=block(s.lines||[],440+b.h,s.size2||64,.8,t,{w:700});
-  const P=person(s.pose||"stand",s.prop?380:540,1150,1.05,t);return ground()+P.svg+(s.prop?prop(s.prop,760,1300,t):"")+b.g+b2.g;},
+  const P=person(s.pose||"stand",s.prop?380:540,1160,.8,t);return ground()+P.svg+(s.prop?prop(s.prop,760,1300,t):"")+b.g+b2.g;},
  // {title, sub, calc, add, prop, stamp[]}
  counter:(s,t)=>{const from=s._from,add=s.add||0;const v=from+add*ease(prog(t,2.2,1.2));
   const P=person(s.pose||"happy",400,1120,1.1,t);let g=P.svg;
@@ -143,8 +143,75 @@ const SCENES={
   "ABCD".split("").slice(0,s.options.length).forEach((L_,i)=>{const t0=1+i*.35,p=back(prog(t,t0,.35));g+=`<g opacity="${cl(prog(t,t0,.2))}" transform="translate(${110+(1-p)*-60},${660+i*130})"><circle cx="40" cy="-18" r="42" fill="${OR}"/><text x="40" y="0" font-family="Inter" font-weight="900" font-size="52" fill="#fff" text-anchor="middle">${L_}</text><text x="110" y="0" font-family="Inter" font-weight="700" font-size="50" fill="${INK}">${esc(s.options[i])}</text></g>`});
   g+=T(s.footer||"Scrie litera în comentarii 👇",470,1230,52,2.8,t,{w:700});return ground()+P.svg+g+handle();}
 };
+Object.assign(SCENES,{
+ // poveste cu Mihai & Ana (imagini). {narr, mihai, ana, say:[[cine,text,poza?]], prop, prop2, enter, disc[], cta}
+ story:(s,t)=>{let g="";const dur=s.d||6,lines=s.say||[],step=Math.max(1.6,(dur-1)/Math.max(1,lines.length));
+  if(s.narr)g+=T(s.narr,540,250,48,.1,t,{w:800,c:"#5b574f"});
+  const pose={mihai:s.mihai,ana:s.ana};let speaking=null;
+  lines.forEach((l,i)=>{if(t>=.4+i*step){speaking=l[0];if(l[2])pose[l[0]]=l[2]}});
+  // bule
+  let by=320;const shown=lines.map((l,i)=>i).filter(i=>t>=.4+i*step).slice(-2);lines.forEach((l,i)=>{const t0=.4+i*step;if(!shown.includes(i))return;const p=back(prog(t,t0,.3)),left=l[0]=="mihai";const rows=wrap(l[1],26),h=rows.length*56+50,w=Math.min(720,Math.max(...rows.map(r=>r.length))*27+90);
+   const x=left?90:990-w;g+=`<g opacity="${cl(prog(t,t0,.15))}" transform="translate(${x+w/2},${by+h/2}) scale(${.7+.3*p}) translate(${-(x+w/2)},${-(by+h/2)})"><rect x="${x}" y="${by}" width="${w}" height="${h}" rx="34" fill="${left?"#fff":"#efe6ff"}" stroke="${INK}" stroke-width="5"/><path d="M${left?x+90:x+w-90},${by+h-3} l${left?-10:10},38 l${left?40:-40},-38" fill="${left?"#fff":"#efe6ff"}" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/><rect x="${left?x+70:x+w-130}" y="${by+h-8}" width="60" height="10" fill="${left?"#fff":"#efe6ff"}"/>${rows.map((r,k)=>`<text x="${x+40}" y="${by+62+k*56}" font-family="Inter" font-weight="700" font-size="44" fill="${INK}">${rich(r)}</text>`).join("")}</g>`;by+=h+40;});
+  // personaje
+  [["mihai",290,-1],["ana",790,1]].forEach(([who,x,side])=>{if(!pose[who])return;const H=pose[who]=="sit"?400:620;let dx=0;if(s.enter)dx=side*700*(1-ease(prog(t,0,.6)));
+   let jump=0;lines.forEach((l,i)=>{const t0=.4+i*step;if(l[0]==who&&t>=t0)jump=Math.max(jump,Math.sin(cl((t-t0)/.35)*Math.PI)*28)});
+   const breathe=1+Math.sin(t*2.2+(side>0?1:0))*.012;
+   g+=`<g transform="translate(${x+dx},${1330-jump}) scale(1,${breathe})"><image href="chars/${who}/${pose[who]}.png" x="-260" y="${-H}" width="520" height="${H}" preserveAspectRatio="xMidYMax meet"/></g>`;});
+  if(s.prop){const p=back(prog(t,s.prop_at||.8,.4));g+=`<g transform="translate(540,1180) scale(${p})"><image href="props/${s.prop}.png" x="-110" y="-110" width="220" height="220" preserveAspectRatio="xMidYMid meet"/></g>`}
+  if(s.cta){const p=back(prog(t,s.cta_at||2,.4));g+=`<g opacity="${cl(prog(t,s.cta_at||2,.2))}" transform="translate(540,${Math.min(by+60,760)}) scale(${p})"><rect x="-230" y="-50" width="460" height="100" rx="26" fill="${OR}"/><text x="0" y="16" font-family="Inter" font-weight="900" font-size="46" fill="#111" text-anchor="middle">${esc(s.cta)}</text></g>`}
+  (s.disc||[]).forEach((d,i)=>{g+=`<text x="540" y="${1400+i*36}" opacity="${cl(prog(t,2.5,.4))}" font-family="Inter" font-weight="500" font-size="25" fill="#8a857a" text-anchor="middle">${esc(d)}</text>`});
+  return `<rect x="0" y="1330" width="1080" height="590" fill="#e8e2d4"/>`+g;},
+
+ // {title, title2, doors:[{label, value, note, color}], open}
+ doors:(s,t)=>{let g=T(s.title,540,380,s.size||80,.1,t)+(s.title2?T(`*${s.title2}*`,540,480,s.size2||70,.4,t):"");
+  const xs=[220,540,860],cols=["#4a90d9","#2f9e5b","#8b5cf6"];
+  s.doors.forEach((d,i)=>{const x=xs[i],y=1300,w=240,h=460,t0=s.open?1+i*1.2:0,op=s.open?ease(prog(t,t0,.6)):0;
+   // ce e in spatele usii
+   g+=`<rect x="${x-w/2}" y="${y-h}" width="${w}" height="${h}" rx="14" fill="#fff" stroke="${INK}" stroke-width="7"/>`;
+   if(s.open){g+=`<g opacity="${cl(prog(t,t0+.3,.3))}"><text x="${x+10}" y="${y-h+150}" font-family="Inter" font-weight="900" font-size="${d.value.length>11?32:(d.value.length>8?42:52)}" fill="${d.color?d.color:INK}" text-anchor="middle">${esc(d.value)}</text>${(d.note?wrap(d.note,13):[]).map((l,k)=>`<text x="${x}" y="${y-h+215+k*40}" font-family="Inter" font-weight="600" font-size="32" fill="#5b574f" text-anchor="middle">${esc(l)}</text>`).join("")}</g>`}
+   // usa (se deschide prin micsorare)
+   const dw=w*(1-op*.93);g+=`<g><rect x="${x-w/2}" y="${y-h}" width="${dw}" height="${h}" rx="14" fill="${cols[i]}" stroke="${INK}" stroke-width="7"/>${op<.5?`<text x="${x-w/2+dw/2}" y="${y-h+150}" font-family="Inter" font-weight="900" font-size="110" fill="#fff" text-anchor="middle">${"ABC"[i]}</text><circle cx="${x-w/2+dw-30}" cy="${y-h/2}" r="14" fill="#ffd84d" stroke="${INK}" stroke-width="5"/>`:""}</g>`;
+   g+=`<text x="${x}" y="${y+60}" font-family="Inter" font-weight="800" font-size="36" fill="${INK}" text-anchor="middle">${esc(d.label)}</text>`;});
+  if(!s.open&&s.countdown){const c=Math.max(1,3-Math.floor(prog(t,1.5,3)*3));g+=`<text x="540" y="650" font-family="Inter" font-weight="900" font-size="120" fill="${OR}" text-anchor="middle" opacity="${cl(prog(t,1.5,.2))}">${c}</text>`}
+  if(s.footer)g+=T(s.footer,540,1460,48,s.open?4.2:2,t,{w:700});
+  return ground(1302)+g;},
+ // {title, item, price, hourly, sub}
+ clock:(s,t)=>{const hours=s.price/s.hourly,p=ease(prog(t,1.2,3)),h=hours*p;
+  let g=T(s.title,540,380,72,.1,t)+T(`*${s.item}: ${fmt(s.price)} lei*`,540,480,62,.4,t);
+  const cx=540,cy=900,r=230,a=h*30*Math.PI/180*4;
+  g+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" stroke="${INK}" stroke-width="10"/>`+[...Array(12)].map((_,i)=>{const q=i*30*Math.PI/180;return L([cx+Math.sin(q)*(r-20),cy-Math.cos(q)*(r-20)],[cx+Math.sin(q)*(r-45),cy-Math.cos(q)*(r-45)],8)}).join("");
+  g+=L([cx,cy],[cx+Math.sin(a)*(r-60),cy-Math.cos(a)*(r-60)],12)+L([cx,cy],[cx+Math.sin(a/12)*(r-110),cy-Math.cos(a/12)*(r-110)],16)+`<circle cx="${cx}" cy="${cy}" r="16" fill="${INK}"/>`;
+  g+=`<text x="540" y="1250" font-family="Inter" font-weight="900" font-size="110" fill="${RED}" text-anchor="middle" opacity="${cl(prog(t,1.2,.3))}">${Math.round(h)} ore</text>`;
+  g+=T(`= ${Math.round(hours/8)} zile de muncă`,540,1360,60,4.4,t)+(s.sub?`<text x="540" y="1440" font-family="Inter" font-weight="500" font-size="28" fill="#9a958a" text-anchor="middle" opacity="${cl(prog(t,4.6,.4))}">${esc(s.sub)}</text>`:"");
+  return g;},
+ // {title, a:{label,start,total,invested}, b:{...}, end_age, note}
+ race:(s,t)=>{let g=T(s.title,540,380,70,.1,t)+(s.title2?T(`*${s.title2}*`,540,470,62,.4,t):"");
+  const p=ease(prog(t,1,Math.max(2,(s.d||8)-3.5))),age=Math.round(s.a.start+(s.end_age-s.a.start)*p);
+  g+=`<text x="540" y="560" font-family="Inter" font-weight="800" font-size="56" fill="${INK}" text-anchor="middle" opacity="${cl(prog(t,.9,.3))}">Vârsta: ${age} ani</text>`;
+  [["a",320],["b",760]].forEach(([k,x])=>{const o=s[k];const started=age>=o.start;const pp=started?cl((age-o.start)/(s.end_age-o.start)):0;const frac=Math.pow(pp,2.2)*(o.total/Math.max(s.a.total,s.b.total));
+   const bh=380*frac;g+=`<rect x="${x-90}" y="${1300-bh}" width="180" height="${bh}" rx="12" fill="${k=="a"?OR:"#4a90d9"}" stroke="${INK}" stroke-width="6"/>`;
+   const P=person(started?"happy":"stand",x,1300-bh-180*.7,.7,t);g+=P.svg;
+   g+=`<text x="${x}" y="1360" font-family="Inter" font-weight="800" font-size="38" fill="${INK}" text-anchor="middle">${esc(o.label)}</text>`;
+   g+=`<text x="${x}" y="1420" font-family="Inter" font-weight="900" font-size="54" fill="${k=="a"?OR:"#2a6fb8"}" text-anchor="middle">${fmt(o.total*Math.pow(pp,2.2))} lei</text>`;});
+  if(s.note)g+=`<text x="540" y="1480" font-family="Inter" font-weight="500" font-size="26" fill="#9a958a" text-anchor="middle">${esc(s.note)}</text>`;
+  return g;},
+ // {claim, verdict, explain, n}
+ myth:(s,t)=>{let g=`<text x="540" y="360" font-family="Inter" font-weight="800" font-size="46" fill="#9a958a" text-anchor="middle">${esc(s.n||"")}</text>`;
+  const f=prog(t,1.8,.5),sx=Math.abs(Math.cos(f*Math.PI)),back_=f>.5;
+  g+=`<g transform="translate(540,800) scale(${sx},1)"><rect x="-400" y="-300" width="800" height="600" rx="40" fill="${back_?(s.verdict=="ADEVĂR"?GR:RED):"#fff"}" stroke="${INK}" stroke-width="8"/>`;
+  if(!back_)g+=wrap("„"+s.claim+"”",16).map((l,i,a)=>`<text x="0" y="${-((a.length-1)*40)+i*80+20}" font-family="Inter" font-weight="900" font-size="66" fill="${INK}" text-anchor="middle">${esc(l)}</text>`).join("");
+  else g+=`<text x="0" y="-60" font-family="Inter" font-weight="900" font-size="150" fill="#fff" text-anchor="middle">${esc(s.verdict)}</text>`+wrap(s.explain,22).map((l,i)=>`<text x="0" y="${60+i*62}" font-family="Inter" font-weight="700" font-size="50" fill="#fff" text-anchor="middle">${esc(l)}</text>`).join("");
+  g+=`</g>`;return g+handle();},
+ // {kicker, words[], sub} fundal inchis
+ kinetic:(s,t)=>{let g=`<rect width="1080" height="1920" fill="#111"/>`;
+  if(s.kicker)g+=`<text x="540" y="420" font-family="Inter" font-weight="800" font-size="52" fill="${OR}" text-anchor="middle" opacity="${cl(prog(t,.1,.3))}">${esc(s.kicker)}</text>`;
+  const n=s.words.length,step=Math.min(.5,((s.d||5)-2)/n);
+  s.words.forEach((w,i)=>{const t0=.4+i*step,p=back(prog(t,t0,.3));const y=600+i*130;g+=`<g opacity="${cl(prog(t,t0,.15))}" transform="translate(540,${y}) scale(${.4+.6*p}) translate(-540,${-y})"><text x="540" y="${y}" font-family="Inter" font-weight="900" font-size="${s.size||110}" fill="${w.startsWith("*")?OR:"#fff"}" text-anchor="middle" letter-spacing="-3">${esc(w.replace(/\*/g,""))}</text></g>`});
+  if(s.sub)g+=wrap(s.sub,34).map((l,k)=>`<text x="540" y="${600+n*130+40+k*56}" font-family="Inter" font-weight="600" font-size="44" fill="#bdb8ad" text-anchor="middle" opacity="${cl(prog(t,.4+n*step+.2,.3))}">${esc(l)}</text>`).join("");
+  return g;},
+});
 let SPEC=null;
 function load(spec){SPEC=spec;let run=0;for(const s of spec.scenes){if(s.type=="counter"){s._from=run;run+=s.add||0}if(s.type=="grow")s.d=s.d||6.5}}
-function durs(){return SPEC.scenes.map(s=>s.d||{hook:4.5,text:5,counter:5.5,flow:6,grow:6.5,cta:7.5,question:6.5}[s.type])}
+function durs(){return SPEC.scenes.map(s=>s.d||{hook:4.5,text:5,counter:5.5,flow:6,grow:6.5,cta:7.5,question:6.5,doors:5,clock:6,race:8,myth:4,kinetic:5,story:6}[s.type])}
 function draw(i,t){const s=SPEC.scenes[i];document.getElementById("s").innerHTML=SCENES[s.type](s,t)}
 </script></body></html>

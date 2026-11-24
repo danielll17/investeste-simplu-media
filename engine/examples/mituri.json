@@ -1,0 +1,9 @@
+{"account":"investeste-simplu","caption":"5 mituri despre bani pe care le-ai auzit sigur. Câte ai crezut? 👀","hashtags":["#bani","#investitii","#educatiefinanciara"],
+"scenes":[
+{"type":"kinetic","kicker":"MIT SAU ADEVĂR?","words":["5 lucruri","despre bani","pe care","*le crezi*"],"d":3.5},
+{"type":"myth","n":"1 / 5","claim":"Investițiile sunt doar pentru bogați","verdict":"MIT","explain":"Poți începe cu 50 de lei pe lună."},
+{"type":"myth","n":"2 / 5","claim":"Banii la saltea sunt în siguranță","verdict":"MIT","explain":"Inflația îi micșorează în fiecare an."},
+{"type":"myth","n":"3 / 5","claim":"Titlurile de stat sunt pentru pensionari","verdict":"MIT","explain":"Le poate cumpăra oricine are peste 18 ani."},
+{"type":"myth","n":"4 / 5","claim":"Crypto e ilegal în România","verdict":"MIT","explain":"E legal. În UE există reguli clare: MiCA."},
+{"type":"myth","n":"5 / 5","claim":"Ca să investești, trebuie să stai pe grafice","verdict":"MIT","explain":"Poți investi lunar, automat, fără să te uiți zilnic."},
+{"type":"question","title":"Câte dintre ele","title2":"le credeai?","options":["niciunul","1 - 2","3 - 4","toate 5"]}]}

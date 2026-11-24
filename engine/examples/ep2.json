@@ -1,0 +1,8 @@
+{"account":"investeste-simplu","okx":true,"caption":"Mihai a luat salariul. Pe 20 nu mai avea nimic. Ana avea un plan 👀 Tu ești Mihai sau Ana? Scrie A, B, C sau D 👇","ig_extra":"Colaborare cu OKX. Crypto e volatil, nu e sfat financiar.","hashtags":["#bani","#salariu","#educatiefinanciara"],
+"scenes":[
+{"type":"story","enter":true,"narr":"Mihai & Ana · Ziua de salariu","mihai":"arms_up","ana":"smirk","prop":"money","say":[["mihai","A venit salariul! 💸"],["ana","Super. Și pe 20 cât mai ai?"]],"d":5.5},
+{"type":"story","mihai":"wallet","ana":"think","say":[["mihai","...pe 20? Nimic. Ca de obicei."],["ana","Știu de ce. Cheltui întâi și economisești ce rămâne."]],"prop":"wallet","prop_at":3,"d":6},
+{"type":"story","mihai":"think","ana":"point","prop":"jar_full","prop_at":2.6,"say":[["ana","Eu pun *10%* deoparte în ziua salariului. Automat."],["mihai","Și cu restul trăiești normal?"],["ana","Exact. Nu mai rămâne nimic de ghicit."]],"d":7},
+{"type":"story","mihai":"wow","ana":"phone","prop":"phone_up","prop_at":2.2,"say":[["ana","O parte în titluri de stat, o parte în *crypto*, automat pe OKX."],["mihai","Stai, se face singur?!"]],"d":6.5},
+{"type":"story","mihai":"phone","ana":"arms_up","say":[["mihai","Bine, cum încep și eu?"],["ana","Link-ul e în bio! 👆"]],"cta":"Link-ul e în bio","cta_at":3.2,"disc":["Întâi un fond de urgență. Crypto e volatil, poți pierde bani.","Colaborare cu OKX. Bonus de până la 400 € pentru conturi noi,","se aplică condiții. Nu e sfat financiar."],"d":6},
+{"type":"question","title":"Tu ești Mihai","title2":"sau Ana?","options":["Mihai, pe 20 sunt pe zero","Ana, pun deoparte primul","undeva la mijloc","încă mă gândesc"]}]}

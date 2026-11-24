@@ -1,0 +1,7 @@
+{"account":"investeste-simplu","caption":"Aceiași 200 de lei pe lună. Diferența: 10 ani. Rezultatul te va surprinde 👀","hashtags":["#investitii","#bani","#educatiefinanciara"],
+"scenes":[
+{"type":"hook","title":"200 lei pe lună.","title2":"Cine strânge mai mult?","pose":"point"},
+{"type":"text","title":"Ana începe la *25 de ani*.","lines":["Mihai începe la 35.","Amândoi se opresc la 60."],"pose":"think"},
+{"type":"race","title":"Cursa până la 60 de ani","a":{"label":"Ana (de la 25)","start":25,"total":360211},"b":{"label":"Mihai (de la 35)","start":35,"total":162014},"end_age":60,"note":"Exemplu cu randament ipotetic de 7%/an. Nu e garantat.","d":9},
+{"type":"text","title":"Ana a pus doar *24.000 lei* în plus.","lines":["Dar are de 2 ori mai mult.","Timpul face cea mai mare parte."],"pose":"idea"},
+{"type":"question","title":"La ce vârstă","title2":"ai început tu?","options":["sub 25","25 - 35","după 35","încă n-am început"]}]}

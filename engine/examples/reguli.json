@@ -1,0 +1,9 @@
+{"account":"investeste-simplu","caption":"5 reguli de bani pe care nu ți le spune nimeni. Pe care o respecți deja? 👇","hashtags":["#bani","#economii","#educatiefinanciara"],
+"scenes":[
+{"type":"kinetic","kicker":"NIMENI NU ȚI LE SPUNE","words":["5 reguli","*de bani*"],"size":140,"d":3},
+{"type":"kinetic","kicker":"REGULA 1","words":["Plătește-te","*pe tine*","primul."],"sub":"Pui deoparte în ziua salariului, nu la final de lună."},
+{"type":"kinetic","kicker":"REGULA 2","words":["Fond de","*urgență:*","3-6 luni."],"sub":"Din cheltuielile tale lunare."},
+{"type":"kinetic","kicker":"REGULA 3","words":["Nu-ți permiți","de 2 ori?","*Nu cumpăra.*"],"sub":"Dacă n-ai prețul de 2 ori, e prea scump pentru tine acum."},
+{"type":"kinetic","kicker":"REGULA 4","words":["Banii pentru","următorii 2 ani","*nu se investesc.*"]},
+{"type":"kinetic","kicker":"REGULA 5","words":["Așteaptă","*48 de ore*","înainte să cumperi."],"sub":"Jumătate din chef dispare singur."},
+{"type":"question","title":"Pe care o respecți","title2":"deja?","options":["regula 1","regula 2","regula 3, 4 sau 5","niciuna, încă"]}]}

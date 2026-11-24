@@ -1,0 +1,7 @@
+{"account":"investeste-simplu","caption":"Ai 10.000 lei. Ce ușă alegi? Scrie A, B sau C înainte să vezi răspunsul 👀","hashtags":["#bani","#investitii","#educatiefinanciara"],
+"scenes":[
+{"type":"hook","title":"Ai 10.000 lei.","title2":"Ce ușă alegi?","pose":"think"},
+{"type":"doors","title":"Peste un an, unde ai","title2":"cei mai mulți bani?","doors":[{"label":"Cont curent"},{"label":"Titluri de stat"},{"label":"Investiții"}],"countdown":true,"footer":"Scrie A, B sau C în comentarii 👇","d":5},
+{"type":"doors","title":"Ce găsești după","title2":"un an:","open":true,"d":6,"doors":[{"label":"Cont curent","value":"10.000 lei","note":"dar cumpără mai puțin","color":"#e23b3b"},{"label":"Titluri de stat","value":"10.660 lei","note":"6,60%, fără impozit","color":"#2f9e5b"},{"label":"Investiții","value":"8,5 - 13 mii","note":"poate urca, poate scădea","color":"#8b5cf6"}],"footer":"Exemplu: Fidelis noiembrie 2026, 2 ani."},
+{"type":"text","title":"Nu există o ușă *perfectă*.","lines":["Contează când ai nevoie de bani.","Sub 2 ani: B. Peste 5 ani: poate și C."],"pose":"idea"},
+{"type":"question","title":"Tu ce ușă","title2":"ai ales?","options":["A, cont curent","B, titluri de stat","C, investiții","toate trei, câte puțin"]}]}

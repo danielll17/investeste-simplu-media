@@ -1,0 +1,8 @@
+{"account":"investeste-simplu","caption":"Câte ore muncești pentru un telefon? Am făcut calculul la salariul mediu 👀","hashtags":["#bani","#salariu","#educatiefinanciara"],
+"scenes":[
+{"type":"hook","title":"Câte ore muncești","title2":"pentru un telefon?","pose":"phone"},
+{"type":"text","title":"Salariul mediu net: *5.717 lei*","lines":["Adică aproximativ 34 lei pe oră.","(septembrie 2026, INS)"],"pose":"think"},
+{"type":"clock","title":"Un telefon nou","item":"Telefon","price":5000,"hourly":34,"sub":"La 168 de ore lucrate pe lună."},
+{"type":"clock","title":"O cafea pe zi, un an","item":"Cafea","price":5475,"hourly":34,"sub":"15 lei pe zi × 365 de zile."},
+{"type":"clock","title":"O vacanță","item":"Vacanță","price":4000,"hourly":34},
+{"type":"question","title":"Pentru ce ai munci","title2":"20 de zile?","options":["telefon nou","vacanță","cafeaua zilnică","le pun deoparte"]}]}
