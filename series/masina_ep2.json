@@ -1,0 +1,11 @@
+{"account":"investeste-simplu","caption":"Episodul 2: Mihai face calculul. Doar 350 € pe lună… dar cât dă în total? 😬 Partea 3 mâine. Tu ai știut asta? Scrie A, B, C sau D 👇","hashtags":["#masina","#credit","#educatiefinanciara"],
+"scenes":[
+{"type":"story","enter":true,"narr":"Mihai vrea mașină · Ep. 2","mihai":"wow","ana":"smirk","say":[["mihai","Ana… am calculat. Nu-mi place ce văd."],["ana","Hai să-l facem împreună.","point"]],"d":6},
+{"type":"story","mihai":"think","ana":"point","big":"350 € × 72 luni","big_color":"#141414","big_size":96,"big_at":0.5,"say":[["ana","6 ani înseamnă 72 de rate."],["mihai","Deci… cât iese?"]],"d":5.5},
+{"type":"story","mihai":"wow","ana":"smirk","big":"= 25.200 €","big_at":0.4,"say":[["mihai","DOUĂZECI ȘI CINCI DE MII?!"],["ana","Pentru o mașină de 20.000."]],"d":5.5},
+{"type":"story","mihai":"shrug","ana":"point","big":"+5.200 €","big_at":0.6,"say":[["ana","Adică *5.200 €* doar dobândă și costuri. Plus CASCO, în fiecare an."]],"disc":["Exemplu simplificat, fără avans.","Costul real depinde de bancă și de DAE."],"d":6},
+{"type":"story","mihai":"wow","ana":"think","big":"≈ 10.000 €","big_color":"#141414","big_at":1.2,"say":[["ana","Și după 6 ani, mașina mai valorează cam jumătate."],["mihai","Stai, CE?"]],"d":6},
+{"type":"story","mihai":"wallet","ana":"smirk","say":[["mihai","Deci dau 25.000 și rămân cu o mașină de 10.000…"],["ana","Bine ai venit în lumea ratelor. 😅"]],"d":6},
+{"type":"story","mihai":"wow","ana":"phone","say":[["ana","Dar am o altă variantă. Una în care mai și strângi bani."],["mihai","ZI-MI. ACUM.","arms_up"]],"d":6},
+{"type":"kinetic","kicker":"MIHAI VREA MAȘINĂ","words":["Episodul 3:","*planul Anei* 👀"],"size":110,"d":3},
+{"type":"question","char":"ana/smirk","title":"Tu știai cât costă","title2":"o mașină în rate?","options":["da, am calculat","nu, m-a surprins","am una în rate acum","iau doar cash"]}]}
