@@ -1,0 +1,15 @@
+{
+  "account": "investeste-simplu",
+  "okx": true,
+  "caption": "Ții banii în cont curent? Atunci pierzi bani în fiecare lună, fără să-i cheltui 👀 Unde îți ții economiile? Scrie A, B, C sau D 👇",
+  "ig_extra": "Colaborare cu OKX. Crypto e volatil, nu e sfat financiar.",
+  "hashtags": ["#bani", "#inflatie", "#educatiefinanciara"],
+  "scenes": [
+    {"type": "hook", "title": "Ții banii în cont curent?", "title2": "Pierzi bani lunar.", "pose": "wallet"},
+    {"type": "text", "title": "Inflația în octombrie: *6,9%*", "lines": ["Prețurile cresc.", "Banii din cont stau pe loc."], "pose": "think", "prop": "chart_up"},
+    {"type": "grow", "title": "10.000 lei în cont curent", "sub": "cât mai cumpără peste un an?", "from": 10000, "to": 9355, "steps": 12, "down": true, "note": "Exemplu simplu, la inflația de 6,9% din octombrie."},
+    {"type": "flow", "title": "Ce poți face în schimb:", "boxes": ["Fond de urgență", "Depozit sau titluri de stat", "Investiții lunare"], "highlight": 2},
+    {"type": "cta", "lines": ["Eu pun lunar o sumă mică", "și în *crypto*, cu cumpărare", "recurentă pe OKX."], "cta": "Link-ul e în bio", "disc": ["Întâi un fond de urgență. Crypto e volatil, poți pierde bani.", "Colaborare cu OKX. Bonus de până la 400 € pentru conturi noi,", "se aplică condiții. Nu e sfat financiar."]},
+    {"type": "question", "title": "Unde îți ții", "title2": "economiile?", "options": ["în cont curent", "depozit", "titluri de stat", "investiții"]}
+  ]
+}

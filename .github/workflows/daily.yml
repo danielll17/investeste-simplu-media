@@ -1,0 +1,42 @@
+name: Postare zilnica
+on:
+  schedule:
+    - cron: "45 14 * * *"   # 16:45 ora Romaniei (iarna); clipurile ies in jur de 17:00
+  workflow_dispatch:
+    inputs:
+      day:
+        description: "Ziua (YYYY-MM-DD), gol = azi"
+        required: false
+      no_post:
+        description: "Doar randare, fara postare"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Instalare
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-inter fonts-noto-color-emoji
+          pip install -q playwright numpy requests
+          python -m playwright install --with-deps chromium
+      - name: Randare si postare
+        env:
+          UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
+        run: python engine/run_day.py ${{ github.event.inputs.day }} ${{ github.event.inputs.no_post == 'true' && '--no-post' || '' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: clipuri, path: out/, retention-days: 7 }
+      - name: Salvare jurnal
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A queue done || true
+          git diff --cached --quiet || (git commit -m "Postare automata $(date +%F)" && git push)

@@ -1,0 +1,150 @@
+<html><head><meta charset="utf-8"><style>
+*{margin:0;padding:0}body{width:1080px;height:1920px;background:#f3efe6;overflow:hidden}svg{display:block}
+</style></head><body><svg id="s" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+<script>
+// ---------- primitive ----------
+const INK="#141414",OR="#f08a00",RED="#e23b3b",GR="#2f9e5b",BG="#f3efe6";
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const ease=t=>{t=cl(t);return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
+const back=t=>{t=cl(t);const c=1.7;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)};
+const prog=(t,a,d)=>cl((t-a)/d);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+// *text* in specs = orange accent
+const rich=s=>esc(s).replace(/\*([^*]+)\*/g,`<tspan fill="${OR}">$1</tspan>`);
+const fmt=n=>Math.round(n).toLocaleString('ro-RO');
+function pt(p,a,l){const r=a*Math.PI/180;return [p[0]+l*Math.sin(r),p[1]+l*Math.cos(r)]}
+function L(a,b,w){return `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${INK}" stroke-width="${w}" stroke-linecap="round"/>`}
+
+// ---------- om-bat ----------
+const POSES={
+ stand:{}, happy:{mood:"happy"}, sad:{mood:"sad",lean:6}, wow:{mood:"wow",armL:[60,150],armR:[-60,-150]},
+ think:{mood:"hmm",look:1,armR:[-30,160]}, idea:{mood:"wow",armR:[-165,-175]},
+ shrug:{mood:"hmm",armL:[120,-160],armR:[-120,160]}, arms_up:{mood:"happy",armL:[135,150],armR:[-135,-150]},
+ phone:{mood:"happy",armR:[-120,-100]}, point:{mood:"happy",armL:[90,90]}, wave:{mood:"happy",armR:[-150,-170],wave:true},
+ lotus:{mood:"calm",legL:[78,-95],legR:[-78,95],armL:[30,75],armR:[-30,-75],sit:true},
+ wallet:{mood:"sad",lean:6,armL:[-35,-80],armR:[35,80],wallet:true}
+};
+function fig(o){
+ const s=o.s||1,w=10*s,x=o.x,y=o.y,lean=o.lean||0;
+ const hip=[x,y],neck=[x+lean*s,y-160*s],head=[neck[0],neck[1]-58*s],sh=[neck[0],neck[1]+18*s];
+ let g=L(hip,neck,w);
+ const limb=(p,a,l1,l2)=>{const m=pt(p,a[0],l1*s),e=pt(m,a[1],l2*s);g+=L(p,m,w)+L(m,e,w);return e};
+ limb(hip,o.legL||[12,0],90,85);limb(hip,o.legR||[-12,0],90,85);
+ const hL=limb(sh,o.armL||[25,10],75,70),hR=limb(sh,o.armR||[-25,-10],75,70);
+ g+=`<circle cx="${head[0]}" cy="${head[1]}" r="${48*s}" fill="${BG}" stroke="${INK}" stroke-width="${w}"/>`;
+ const hx=head[0]+(o.look||0)*10*s,hy=head[1],m=o.mood||"ok",sw=6*s,P=(d)=>`<path d="${d}" stroke="${INK}" stroke-width="${sw}" fill="none" stroke-linecap="round"/>`;
+ if(m=="happy"||m=="calm")g+=P(`M${hx-24*s},${hy-6*s} q${8*s},-${10*s} ${16*s},0 M${hx+8*s},${hy-6*s} q${8*s},-${10*s} ${16*s},0`);
+ else g+=`<circle cx="${hx-16*s}" cy="${hy-6*s}" r="${(m=="wow"?8:6)*s}" fill="${INK}"/><circle cx="${hx+16*s}" cy="${hy-6*s}" r="${(m=="wow"?8:6)*s}" fill="${INK}"/>`;
+ if(m=="happy")g+=P(`M${hx-20*s},${hy+14*s} q${20*s},${22*s} ${40*s},0`);
+ if(m=="calm"||m=="ok")g+=P(`M${hx-14*s},${hy+18*s} q${14*s},${10*s} ${28*s},0`);
+ if(m=="sad")g+=P(`M${hx-16*s},${hy+24*s} q${16*s},-${14*s} ${32*s},0`);
+ if(m=="wow")g+=`<ellipse cx="${hx}" cy="${hy+20*s}" rx="${9*s}" ry="${12*s}" fill="${INK}"/>`;
+ if(m=="hmm")g+=P(`M${hx-12*s},${hy+20*s} l${26*s},-${5*s}`);
+ return {svg:g,hL,hR,head};
+}
+function person(pose,x,y,s,t){
+ const p=Object.assign({},POSES[pose]||POSES.stand,{x,y,s});
+ if(p.sit)p.y=y+142*s;
+ if(p.wave){const wv=Math.sin(t*6)*25;p.armR=[p.armR[0]+wv,p.armR[1]+wv]}
+ if(pose=="arms_up")p.y=y-Math.abs(Math.sin(t*5))*50;
+ if(pose=="sad"||pose=="wallet")p.y=y+Math.sin(t*3)*4;
+ if(pose=="think"&&t>2.4&&false)p.armR=[-165,-175];
+ const F=fig(p);let g=F.svg;
+ if(pose=="wallet"){const w=[(F.hL[0]+F.hR[0])/2,F.hL[1]];g+=`<rect x="${w[0]-70}" y="${w[1]-10}" width="140" height="80" rx="12" fill="#8b5a2b" stroke="${INK}" stroke-width="6"/>`;
+  const mp=prog(t,1.3,2.5);if(mp>0){const mx=w[0]+mp*220,my=w[1]-mp*320+Math.sin(t*14)*16,fl=Math.abs(Math.sin(t*22));g+=`<g transform="translate(${mx},${my})"><ellipse rx="10" ry="14" fill="#6b5d4d"/><ellipse cx="-16" cy="-4" rx="18" ry="${4+10*fl}" fill="#b9ad98" stroke="${INK}" stroke-width="3"/><ellipse cx="16" cy="-4" rx="18" ry="${4+10*fl}" fill="#b9ad98" stroke="${INK}" stroke-width="3"/></g>`}}
+ if(pose=="phone")g+=phone(F.hR[0]+10,F.hR[1]-20,.7);
+ if(pose=="idea"){const p2=back(prog(t,.4,.4));g+=`<g transform="translate(${F.head[0]+110},${F.head[1]-120}) scale(${p2})"><circle r="44" fill="#ffd84d" stroke="${INK}" stroke-width="6"/><rect x="-18" y="40" width="36" height="26" rx="6" fill="#bbb" stroke="${INK}" stroke-width="5"/>${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180;return L([70*Math.cos(r),70*Math.sin(r)-10],[92*Math.cos(r),92*Math.sin(r)-10],6)}).join("")}</g>`}
+ return {svg:g,F};
+}
+
+// ---------- obiecte ----------
+function cup(x,y,s=1){return `<g transform="translate(${x},${y}) scale(${s})"><path d="M-30,-50 L30,-50 L24,20 L-24,20Z" fill="#fff" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/><rect x="-34" y="-62" width="68" height="14" rx="6" fill="#6b4226" stroke="${INK}" stroke-width="5"/></g>`}
+function pkg(x,y,s=1){return `<g transform="translate(${x},${y}) scale(${s})"><rect x="-55" y="-45" width="110" height="90" rx="8" fill="#d9a65a" stroke="${INK}" stroke-width="6"/><path d="M-55,-10 H55 M0,-45 V45" stroke="${INK}" stroke-width="4"/></g>`}
+function phone(x,y,s=1){return `<g transform="translate(${x},${y}) scale(${s})"><rect x="-45" y="-80" width="90" height="160" rx="16" fill="#111"/><rect x="-36" y="-66" width="72" height="128" rx="6" fill="#fff"/><text x="0" y="10" font-family="Inter" font-weight="900" font-size="34" fill="${GR}" text-anchor="middle">✓</text></g>`}
+function bill(x,y,r){return `<g transform="translate(${x},${y}) rotate(${r})"><rect x="-55" y="-28" width="110" height="56" rx="6" fill="${GR}" stroke="${INK}" stroke-width="4"/><text x="0" y="12" font-family="Inter" font-weight="900" font-size="30" fill="#fff" text-anchor="middle">100</text></g>`}
+function money(x,y,n){let g="";for(let i=0;i<n;i++)g+=`<rect x="${x-77}" y="${y-i*20}" width="154" height="18" rx="4" fill="${GR}" stroke="${INK}" stroke-width="4"/>`;return g}
+function jar(x,y,fill){const h=260,w=200;return `<clipPath id="jc"><rect x="${x-w/2+8}" y="${y-h+30}" width="${w-16}" height="${h-38}" rx="30"/></clipPath><rect x="${x-w/2}" y="${y-h+40}" width="${w}" height="${h-40}" rx="40" fill="#fff" stroke="${INK}" stroke-width="8"/><rect clip-path="url(#jc)" x="${x-w/2}" y="${y-(h-50)*fill-8}" width="${w}" height="${(h-50)*fill+8}" fill="${OR}" opacity=".85"/><rect x="${x-w/2+20}" y="${y-h+10}" width="${w-40}" height="34" rx="10" fill="#d6d0c2" stroke="${INK}" stroke-width="6"/>`}
+function chart(x,y,up,p){const pts=up?[0,30,10,60,40,90,70,130,110,170]:[170,140,150,100,120,70,80,40,50,10];const n=Math.max(2,Math.round(pts.length*p));const d=pts.slice(0,n).map((v,i)=>`${x-170+i*38},${y-v*1.4}`).join(" ");return `<rect x="${x-200}" y="${y-280}" width="400" height="300" rx="20" fill="#fff" stroke="${INK}" stroke-width="6"/><polyline points="${d}" fill="none" stroke="${up?GR:RED}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`}
+function calendar(x,y,txt){return `<g transform="translate(${x},${y})"><rect x="-90" y="-100" width="180" height="190" rx="18" fill="#fff" stroke="${INK}" stroke-width="6"/><rect x="-90" y="-100" width="180" height="50" rx="18" fill="${RED}"/><text x="0" y="55" font-family="Inter" font-weight="900" font-size="80" fill="${INK}" text-anchor="middle">${esc(txt)}</text></g>`}
+function house(x,y){return `<g transform="translate(${x},${y})"><path d="M-130,0 V-150 L0,-260 L130,-150 V0Z" fill="#fff" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/><rect x="-35" y="-100" width="70" height="100" fill="${OR}" stroke="${INK}" stroke-width="6"/></g>`}
+function car(x,y){return `<g transform="translate(${x},${y})"><path d="M-160,-30 L-120,-100 L80,-100 L130,-40 L170,-30 L170,0 L-160,0Z" fill="#4a90d9" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/><circle cx="-90" cy="0" r="34" fill="#333" stroke="${INK}" stroke-width="6"/><circle cx="100" cy="0" r="34" fill="#333" stroke="${INK}" stroke-width="6"/></g>`}
+function prop(name,x,y,t){
+ if(name=="cup")return cup(x,y-100,1.3);
+ if(name=="tv")return `<g transform="translate(${x},${y})"><rect x="-130" y="-260" width="260" height="170" rx="10" fill="#111"/><rect x="-118" y="-248" width="236" height="146" fill="#1f3b63"/><rect x="-12" y="-90" width="24" height="70" fill="#444"/><rect x="-60" y="-24" width="120" height="14" rx="7" fill="#444"/></g>`;
+ if(name=="house")return house(x,y);
+ if(name=="car")return car(x,y);
+ if(name=="chart_up")return chart(x,y-40,true,prog(t,.3,2));
+ if(name=="chart_down")return chart(x,y-40,false,prog(t,.3,2));
+ if(name=="jar")return jar(x,y,.15+.7*ease(prog(t,.8,3)));
+ if(name=="jar_empty")return jar(x,y,.85-.75*ease(prog(t,.8,3)));
+ if(name=="money")return money(x,y-30,12);
+ if(name=="pkg"){let g="";const n=Math.min(8,Math.floor(prog(t,.6,2.4)*8)+1);for(let i=0;i<n;i++)g+=pkg(x+(i%3)*110-110-(Math.floor(i/3)%2)*55,y-50-Math.floor(i/3)*85,.75);return g}
+ if(name=="phone")return phone(x,y-160,1.4);
+ if(name=="calendar")return calendar(x,y-120,"1");
+ return "";
+}
+
+// ---------- text ----------
+function T(txt,x,y,size,t0,t,o={}){
+ const p=back(prog(t,t0,.35)),op=cl(prog(t,t0,.2)),sc=.6+.4*p;
+ return `<g opacity="${op}" transform="translate(${x},${y}) scale(${sc}) translate(${-x},${-y})"><text x="${x}" y="${y}" font-family="Inter" font-weight="${o.w||900}" font-size="${size}" fill="${o.c||INK}" text-anchor="${o.a||'middle'}" letter-spacing="-2">${rich(txt)}</text></g>`;
+}
+// impartire automata pe randuri
+function wrap(txt,max){const w=String(txt).split(" ");const out=[];let cur="";for(const x of w){if((cur+" "+x).trim().length>max&&cur){out.push(cur);cur=x}else cur=(cur+" "+x).trim()}if(cur)out.push(cur);return out}
+function block(lines,y,size,t0,t,o={}){const max=o.max||Math.floor(1700/size);let g="",k=0;for(const ln of lines){let open=false;for(let r of wrap(ln,max)){if(open)r="*"+r;const c=(r.match(/\*/g)||[]).length;if(c%2){r=r+"*";open=true}else open=false;g+=T(r,o.x||540,y+k*size*1.18,size,t0+k*.25,t,o);k++}}return {g,h:k*size*1.18}}
+const ground=(y=1300)=>`<line x1="120" y1="${y}" x2="960" y2="${y}" stroke="#d6d0c2" stroke-width="6" stroke-linecap="round"/>`;
+const handle=()=>`<text x="540" y="1450" font-family="Inter" font-weight="600" font-size="30" fill="#9a958a" text-anchor="middle">${esc(SPEC.handle||"@investeste.simplu")}</text>`;
+function box(x,y,wd,txt,t0,t,hl){const p=back(prog(t,t0,.35));return `<g opacity="${cl(prog(t,t0,.2))}" transform="translate(${x},${y}) scale(${.5+.5*p})"><rect x="${-wd/2}" y="-55" width="${wd}" height="110" rx="26" fill="${hl?'#fff3dd':'#fff'}" stroke="${INK}" stroke-width="6"/><text x="0" y="17" font-family="Inter" font-weight="800" font-size="50" fill="${hl?OR:INK}" text-anchor="middle">${esc(txt)}</text></g>`}
+function arrow(x,y1,y2,t0,t){const p=ease(prog(t,t0,.3));if(p<=0)return"";const ye=y1+(y2-y1)*p;return L([x,y1],[x,ye],8)+(p>.95?`<path d="M${x-18},${y2-20} L${x},${y2} L${x+18},${y2-20}" stroke="${INK}" stroke-width="8" fill="none" stroke-linecap="round"/>`:"")}
+function pill(txt,color,t0,t){const p=cl(prog(t,t0,.3));return `<g opacity="${p}"><rect x="240" y="1360" width="600" height="80" rx="40" fill="#fff" stroke="${INK}" stroke-width="5"/><text x="540" y="1414" font-family="Inter" font-weight="900" font-size="46" fill="${color}" text-anchor="middle">${esc(txt)}</text></g>`}
+function stamp(lines,t0,t,y=1000){if(!lines||t<t0)return"";const p=back(prog(t,t0,.4));return `<g transform="translate(540,${y}) scale(${p}) rotate(-6)"><rect x="-320" y="-${50+lines.length*30}" width="640" height="${100+lines.length*60}" rx="26" fill="${RED}"/>${lines.map((l,i)=>`<text x="0" y="${-((lines.length-1)*30)+i*64+20}" font-family="Inter" font-weight="900" font-size="${i?48:64}" fill="#fff" text-anchor="middle">${esc(l)}</text>`).join("")}</g>`}
+
+// ---------- tipuri de scene ----------
+let RUN=0; // total cumulat pentru scenele "counter"
+const SCENES={
+ // {title, title2, pose, prop}
+ hook:(s,t)=>{const P=person(s.pose||"wow",s.prop?380:540,1120,1.2,t);let g=P.svg;
+  if(s.prop=="bills"){for(let i=0;i<5;i++){const p=prog(t,1+i*.45,1.6);if(p>0&&p<1)g+=bill(P.F.hL[0]+40+p*460,P.F.hL[1]-p*220+Math.sin(p*9+i)*40,p*200+i*30)}}
+  else if(s.prop)g+=prop(s.prop,760,1300,t);
+  const b1=block([s.title],420,s.size||92,.1,t,{max:Math.floor(1800/(s.size||92))});const b2=s.title2?block([`*${s.title2}*`],430+b1.h,s.size2||80,.5,t,{max:Math.floor(1800/(s.size2||80))}):{g:""};
+  return ground()+g+b1.g+b2.g;},
+ // {title, lines[], pose, prop}
+ text:(s,t)=>{const b=block([s.title],420,s.size||86,.1,t);const b2=block(s.lines||[],440+b.h,s.size2||64,.8,t,{w:700});
+  const P=person(s.pose||"stand",s.prop?380:540,1150,1.05,t);return ground()+P.svg+(s.prop?prop(s.prop,760,1300,t):"")+b.g+b2.g;},
+ // {title, sub, calc, add, prop, stamp[]}
+ counter:(s,t)=>{const from=s._from,add=s.add||0;const v=from+add*ease(prog(t,2.2,1.2));
+  const P=person(s.pose||"happy",400,1120,1.1,t);let g=P.svg;
+  if(s.prop=="cup")g+=cup(P.F.hR[0]-10,P.F.hR[1]+10,.9);else if(s.prop=="subs")(s.items||[]).forEach((it,i)=>{const p=back(prog(t,.8+i*.3,.35));g+=`<g opacity="${cl(prog(t,.8+i*.3,.2))}" transform="translate(760,${900+i*95}) scale(${p})"><rect x="-150" y="-36" width="300" height="72" rx="18" fill="#fff" stroke="${INK}" stroke-width="5"/><text x="-125" y="12" font-family="Inter" font-weight="700" font-size="34" fill="${INK}">${esc(it[0])}</text><text x="125" y="12" font-family="Inter" font-weight="800" font-size="34" fill="${RED}" text-anchor="end">${esc(it[1])}</text></g>`});else if(s.prop)g+=prop(s.prop,760,1300,t);
+  g+=T(s.title,540,420,88,.1,t)+(s.sub?T(s.sub,540,520,52,.5,t,{w:600,c:"#5b574f"}):"")+(s.calc?T(`*${s.calc}*`,540,660,96,1.2,t):"");
+  g+=pill(`${s.total_label||"Total"}: ${fmt(v)} lei`,s.good?GR:RED,.2,t)+stamp(s.stamp,3.6,t);return ground()+g;},
+ // {title, boxes[], highlight, stamp, jar}
+ flow:(s,t)=>{let g=T(s.title,540,400,76,.1,t);const n=s.boxes.length;
+  s.boxes.forEach((b,i)=>{const y=540+i*160;g+=box(540,y,Math.max(440,b.length*30+120),b,.5+i*.6,t,i===s.highlight);if(i<n-1)g+=arrow(540,y+55,y+105,.9+i*.6,t)});
+  const end=.5+n*.6;
+  if(s.stamp&&t>end+.4){const p=back(prog(t,end+.4,.4));g+=`<g transform="translate(790,${540+(n-1)*160+100}) rotate(-10) scale(${p})"><rect x="-130" y="-50" width="260" height="100" rx="16" fill="#fff" stroke="${RED}" stroke-width="8"/><text x="0" y="20" font-family="Inter" font-weight="900" font-size="58" fill="${RED}" text-anchor="middle">${esc(s.stamp)}</text></g>`}
+  const P=person(s.jar?"phone":(s.stamp&&t>end?"shrug":"stand"),300,1150,.8,t);g+=P.svg;
+  if(s.jar){g+=jar(760,1290,.12*ease(prog(t,end+1,.5)));const cp=prog(t,end,1);if(cp>0&&cp<1){const x=P.F.hR[0]+(760-P.F.hR[0])*cp,y=P.F.hR[1]-260*Math.sin(Math.PI*cp)+(1110-P.F.hR[1])*cp;g+=`<circle cx="${x}" cy="${y}" r="26" fill="${OR}" stroke="${INK}" stroke-width="5"/>`}}
+  return ground()+g;},
+ // {title, sub, from, to, steps, step_label, note, down}
+ grow:(s,t)=>{const p=ease(prog(t,1.6,Math.max(2,s.d-3)));const k=Math.max(1,Math.round(1+(s.steps-1)*p));const v=s.from+(s.to-s.from)*p;
+  let g=T(s.title,540,400,64,.1,t)+(s.sub?T(s.sub,540,480,46,.4,t,{w:600,c:"#5b574f"}):"");
+  g+=`<text x="540" y="640" font-family="Inter" font-weight="800" font-size="56" fill="${INK}" text-anchor="middle" opacity="${cl(prog(t,1.4,.3))}">${esc(s.step_label||"Luna")} ${k}</text>`;
+  g+=`<text x="540" y="790" font-family="Inter" font-weight="900" font-size="140" fill="${s.down?RED:OR}" text-anchor="middle" opacity="${cl(prog(t,1.4,.3))}">${fmt(v)} lei</text>`;
+  g+=jar(760,1290,s.down?.85-.6*p:.12+.85*p);const P=person(s.down?"sad":"lotus",330,1120,.85,t);g+=P.svg;
+  if(s.note)g+=`<text x="540" y="1390" font-family="Inter" font-weight="500" font-size="28" fill="#9a958a" text-anchor="middle" opacity="${cl(prog(t,s.d-1.5,.5))}">${esc(s.note)}</text>`;
+  return ground()+g;},
+ // {lines[], cta, disc[]}
+ cta:(s,t)=>{const b=block(s.lines,400,s.size||66,.1,t,{max:26});const P=person("phone",330,1120,1,t);let g=P.svg+jar(780,1290,.1+.75*ease(prog(t,2.4,3.5)))+b.g;
+  if(s.cta){const p=back(prog(t,2.6,.4));g+=`<g opacity="${cl(prog(t,2.6,.2))}" transform="translate(560,${Math.max(790,420+b.h+40)}) scale(${p})"><rect x="-230" y="-50" width="460" height="100" rx="26" fill="${OR}"/><text x="0" y="16" font-family="Inter" font-weight="900" font-size="46" fill="#111" text-anchor="middle">${esc(s.cta)}</text></g>`}
+  (s.disc||[]).forEach((d,i)=>{g+=`<text x="540" y="${1370+i*38}" opacity="${cl(prog(t,3,.4))}" font-family="Inter" font-weight="500" font-size="26" fill="#8a857a" text-anchor="middle">${esc(d)}</text>`});
+  return ground()+g;},
+ // {title, title2, options[4]}
+ question:(s,t)=>{const P=person("wave",840,1150,.85,t);let g=T(s.title,470,400,76,.1,t)+(s.title2?T(`*${s.title2}*`,470,500,76,.4,t):"");
+  "ABCD".split("").slice(0,s.options.length).forEach((L_,i)=>{const t0=1+i*.35,p=back(prog(t,t0,.35));g+=`<g opacity="${cl(prog(t,t0,.2))}" transform="translate(${110+(1-p)*-60},${660+i*130})"><circle cx="40" cy="-18" r="42" fill="${OR}"/><text x="40" y="0" font-family="Inter" font-weight="900" font-size="52" fill="#fff" text-anchor="middle">${L_}</text><text x="110" y="0" font-family="Inter" font-weight="700" font-size="50" fill="${INK}">${esc(s.options[i])}</text></g>`});
+  g+=T(s.footer||"Scrie litera în comentarii 👇",470,1230,52,2.8,t,{w:700});return ground()+P.svg+g+handle();}
+};
+let SPEC=null;
+function load(spec){SPEC=spec;let run=0;for(const s of spec.scenes){if(s.type=="counter"){s._from=run;run+=s.add||0}if(s.type=="grow")s.d=s.d||6.5}}
+function durs(){return SPEC.scenes.map(s=>s.d||{hook:4.5,text:5,counter:5.5,flow:6,grow:6.5,cta:7.5,question:6.5}[s.type])}
+function draw(i,t){const s=SPEC.scenes[i];document.getElementById("s").innerHTML=SCENES[s.type](s,t)}
+</script></body></html>
