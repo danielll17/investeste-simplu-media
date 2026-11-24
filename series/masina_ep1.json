@@ -1,0 +1,143 @@
+{
+ "account": "investeste-simplu",
+ "caption": "Mihai a găsit mașina visurilor. Doar 350 € pe lună… ce poate să meargă prost? 👀 Partea 2 mâine. Tu cum ai lua o mașină? Scrie A, B, C sau D 👇",
+ "hashtags": [
+  "#masina",
+  "#bani",
+  "#educatiefinanciara"
+ ],
+ "scenes": [
+  {
+   "type": "story",
+   "enter": "mihai",
+   "narr": "Mihai vrea mașină · Ep. 1",
+   "mihai": "phone",
+   "prop": "car_red",
+   "prop_at": 2.2,
+   "say": [
+    [
+     "mihai",
+     "Ea e. Mașina mea. 😍"
+    ]
+   ],
+   "d": 5
+  },
+  {
+   "type": "story",
+   "mihai": "wow",
+   "big": "20.000 €",
+   "big_at": 0.5,
+   "say": [
+    [
+     "mihai",
+     "Douăzeci de mii?!"
+    ]
+   ],
+   "d": 5
+  },
+  {
+   "type": "story",
+   "mihai": "arms_up",
+   "big": "*doar 350 € / lună*",
+   "big_size": 96,
+   "big_at": 0.8,
+   "say": [
+    [
+     "mihai",
+     "Staaai… doar 350 pe lună! O iau!"
+    ]
+   ],
+   "d": 5.5
+  },
+  {
+   "type": "story",
+   "mihai": "point",
+   "prop": "car_red",
+   "prop_at": 0.3,
+   "say": [
+    [
+     "mihai",
+     "Mă și văd: drumuri la mare, poze, toți mă întreabă de ea 😎"
+    ]
+   ],
+   "d": 6
+  },
+  {
+   "type": "story",
+   "enter": "ana",
+   "mihai": "phone",
+   "ana": "smirk",
+   "say": [
+    [
+     "ana",
+     "Frumoasă. Și pe câți ani e creditul?"
+    ],
+    [
+     "mihai",
+     "Păi… 6? Nu contează, e doar 350!",
+     "shrug"
+    ]
+   ],
+   "d": 7
+  },
+  {
+   "type": "story",
+   "mihai": "shrug",
+   "ana": "point",
+   "say": [
+    [
+     "ana",
+     "Contează. Știi cât dai pe ea *în total*?"
+    ],
+    [
+     "mihai",
+     "…în total?",
+     "think"
+    ]
+   ],
+   "d": 6.5
+  },
+  {
+   "type": "story",
+   "mihai": "think",
+   "ana": "smirk",
+   "big": "350 × 72 = ?",
+   "big_color": "#141414",
+   "big_at": 2,
+   "say": [
+    [
+     "mihai",
+     "350 ori 12… ori 6 ani… stai…"
+    ],
+    [
+     "mihai",
+     "…STAI.",
+     "wow"
+    ]
+   ],
+   "d": 6.5
+  },
+  {
+   "type": "kinetic",
+   "kicker": "MIHAI VREA MAȘINĂ",
+   "words": [
+    "Episodul 2:",
+    "*mâine* 👀"
+   ],
+   "size": 120,
+   "d": 3
+  },
+  {
+   "type": "question",
+   "title": "Tu cum ai lua",
+   "title2": "o mașină?",
+   "options": [
+    "în rate",
+    "cash, din economii",
+    "leasing",
+    "second-hand"
+   ],
+   "char": "mihai/think"
+  }
+ ]
+}
