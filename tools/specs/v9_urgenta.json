@@ -1,0 +1,49 @@
+{
+ "handle": "@investeste.simplu",
+ "slides": [
+  {
+   "type": "cover",
+   "title": "Ți se strică mașina mâine. <span class=\"accent\">De unde plătești?</span>",
+   "sub": "Dacă răspunsul e „de pe card”, citește tot."
+  },
+  {
+   "type": "text",
+   "title": "Fondul de urgență",
+   "text": "Bani puși deoparte doar pentru neprevăzut: o reparație, un drum la doctor, un job pierdut.<br><br>Nu sunt pentru vacanță. Nu sunt pentru investit.<br><br>La final te întreb ceva 👀"
+  },
+  {
+   "type": "step",
+   "num": "1",
+   "title": "Cât îți trebuie",
+   "text": "Regula simplă: <span class=\"accent\">3-6 luni</span> de cheltuieli. Cheltui 4.000 de lei pe lună? Ținta ta e între 12.000 și 24.000 de lei."
+  },
+  {
+   "type": "step",
+   "num": "2",
+   "title": "De ce nu pe datorie",
+   "text": "La creditele noi de consum, DAE medie a fost <span class=\"accent\">10,45%</span> (BNR, septembrie). O urgență pusă pe datorie te costă de două ori: o dată urgența, o dată dobânda."
+  },
+  {
+   "type": "step",
+   "num": "3",
+   "title": "Unde îl ții",
+   "text": "Undeva sigur și ușor de scos: un cont de economii sau un depozit cu retragere rapidă. <span class=\"accent\">Nu în crypto, nu în acțiuni</span>: când ai nevoie de bani, piața poate fi pe minus."
+  },
+  {
+   "type": "step",
+   "num": "4",
+   "title": "Cum îl strângi",
+   "text": "Începe mic: 10% din salariu, automat, în ziua de salariu. Ține-l într-un cont separat, ca să nu-l vezi zilnic. Prima țintă: <span class=\"accent\">o lună de cheltuieli</span>."
+  },
+  {
+   "type": "text",
+   "title": "Abia după: unde pot munci banii",
+   "text": "<span class=\"accent\">Titluri de stat</span>: dobândă fixă, risc mic<br><span class=\"accent\">ETF-uri</span>: toată bursa într-un singur coș<br><span class=\"accent\">Acțiuni</span>: firme alese de tine, risc mai mare<br><span class=\"accent\">Crypto</span>: potențial mare, cel mai mare risc<br><br>Fondul de urgență e fundația. Investițiile sunt casa."
+  },
+  {
+   "type": "text",
+   "title": "Câte luni de cheltuieli ai puse deoparte?",
+   "text": "Scrie litera în comentarii 👇<br><br><span class=\"accent\">A</span> încă nimic<br><span class=\"accent\">B</span> sub o lună<br><span class=\"accent\">C</span> între 1 și 3 luni<br><span class=\"accent\">D</span> peste 3 luni"
+  }
+ ]
+}
