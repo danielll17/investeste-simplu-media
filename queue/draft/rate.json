@@ -1,0 +1,9 @@
+{"account":"investeste-simplu","caption":"Rata la telefon, rata la TV, rata la vacanță… Câte rate ai TU acum? 👀 Scrie A, B, C sau D 👇","hashtags":["#rate","#bani","#educatiefinanciara"],
+"scenes":[
+{"type":"hook","title":"Câte rate","title2":"plătești luna asta?","pose":"wallet"},
+{"type":"counter","title":"Rata la telefon","sub":"„e doar 150 de lei”","calc":"150 lei / lună","add":150,"total_label":"Rate","pose":"phone"},
+{"type":"counter","title":"Rata la televizor","sub":"„era la reducere”","calc":"100 lei / lună","add":100,"total_label":"Rate","prop":"tv","pose":"happy"},
+{"type":"counter","title":"Vacanța în rate","sub":"„merit și eu”","calc":"200 lei / lună","add":200,"total_label":"Rate","pose":"arms_up"},
+{"type":"counter","title":"Cardul de credit","sub":"„îl plătesc luna viitoare”","calc":"300 lei / lună","add":300,"total_label":"Rate","pose":"wow","stamp":["750 lei / lună","= 9.000 lei / an"]},
+{"type":"text","title":"Regula celor *2 ori*:","lines":["Dacă n-ai bani cash","să-l plătești de 2 ori,","nu ți-l permiți încă."],"pose":"idea"},
+{"type":"question","title":"Câte rate","title2":"ai acum?","options":["niciuna","1 - 2","3 - 4","5 sau mai multe"]}]}

@@ -12,6 +12,8 @@ def render(spec_path, out, preview=False):
         b = p.chromium.launch(**kw)
         pg = b.new_page(viewport={"width": 1080, "height": 1920})
         pg.goto((HERE / "page.html").as_uri()); pg.wait_for_timeout(300)
+        assets = [str(x.relative_to(HERE)) for x in list((HERE / "chars").rglob("*.png")) + list((HERE / "props").glob("*.png"))]
+        pg.evaluate("l=>preload(l)", assets)
         pg.evaluate("s=>load(s)", spec)
         durs = pg.evaluate("durs()")
         if preview:
@@ -24,8 +26,11 @@ def render(spec_path, out, preview=False):
             n = int(round(d * FPS)); part = work / f"s{i}.mp4"; tmp = work / f"s{i}.tmp.mp4"
             ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", str(FPS), "-c:v", "mjpeg", "-i", "-",
                                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS), str(tmp)], stdin=subprocess.PIPE)
+            cover_t = spec.get("cover_t", min(durs[0] - 0.3, 3.0))
             for k in range(n):
-                pg.evaluate(f"draw({i},{k / FPS})")
+                # primele cadre ale clipului = coperta (TikTok/Instagram iau primul cadru ca miniatura)
+                tt = cover_t if (i == 0 and k < 4) else k / FPS
+                pg.evaluate(f"draw({i},{tt})")
                 ff.stdin.write(pg.screenshot(type="jpeg", quality=92))
             ff.stdin.close()
             if ff.wait() != 0: raise SystemExit(f"ffmpeg a esuat la scena {i}")

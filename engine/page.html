@@ -212,6 +212,7 @@ Object.assign(SCENES,{
   return g;},
 });
 let SPEC=null;
+async function preload(list){await Promise.all(list.map(u=>new Promise(r=>{const i=new Image();i.onload=i.onerror=()=>r();i.src=u})));const svg=document.getElementById('s');svg.innerHTML=list.map(u=>`<image href="${u}" width="1" height="1"/>`).join('');await new Promise(r=>setTimeout(r,300));return list.length}
 function load(spec){SPEC=spec;let run=0;for(const s of spec.scenes){if(s.type=="counter"){s._from=run;run+=s.add||0}if(s.type=="grow")s.d=s.d||6.5}}
 function durs(){return SPEC.scenes.map(s=>s.d||{hook:4.5,text:5,counter:5.5,flow:6,grow:6.5,cta:7.5,question:6.5,doors:5,clock:6,race:8,myth:4,kinetic:5,story:6}[s.type])}
 function draw(i,t){const s=SPEC.scenes[i];document.getElementById("s").innerHTML=SCENES[s.type](s,t)}

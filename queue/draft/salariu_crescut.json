@@ -1,0 +1,66 @@
+{
+ "account": "investeste-simplu",
+ "caption": "Salariul tău a crescut. Atunci de ce ai senzația că ești mai sărac? 👀 Ție ți-a crescut salariul anul ăsta? Scrie A, B, C sau D 👇",
+ "hashtags": [
+  "#salariu",
+  "#inflatie",
+  "#bani"
+ ],
+ "scenes": [
+  {
+   "type": "hook",
+   "title": "Ți-a crescut salariul.",
+   "title2": "Și totuși ești mai sărac.",
+   "pose": "wallet"
+  },
+  {
+   "type": "text",
+   "title": "Salariul mediu net: *+5%* într-un an.",
+   "lines": [
+    "Septembrie 2026, INS."
+   ],
+   "pose": "happy",
+   "prop": "chart_up"
+  },
+  {
+   "type": "text",
+   "title": "Dar prețurile au crescut *mai repede*.",
+   "lines": [
+    "Cu același salariu cumperi",
+    "cu 1,5% mai puțin decât acum un an."
+   ],
+   "pose": "wow",
+   "prop": "chart_down"
+  },
+  {
+   "type": "counter",
+   "title": "Plus „merit și eu”",
+   "sub": "abonamente noi, livrări, rate",
+   "calc": "+600 lei / lună",
+   "add": 600,
+   "total_label": "Cheltuieli noi",
+   "prop": "pkg",
+   "pose": "shrug"
+  },
+  {
+   "type": "text",
+   "title": "Regula simplă:",
+   "lines": [
+    "Din orice creștere de salariu,",
+    "*jumătate* merge direct deoparte."
+   ],
+   "pose": "idea"
+  },
+  {
+   "type": "question",
+   "title": "Ție ți-a crescut",
+   "title2": "salariul anul ăsta?",
+   "options": [
+    "da, dar nu simt",
+    "da, și economisesc",
+    "nu, a rămas la fel",
+    "a scăzut"
+   ]
+  }
+ ]
+}

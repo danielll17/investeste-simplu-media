@@ -1,0 +1,11 @@
+{"account":"investeste-simplu","okx":true,"caption":"Episodul 3: planul Anei. Aceeași mașină de care ai nevoie, jumătate din rată și 14.000 € strânși în 6 ani 👀 Voi decideți finalul: scrie A, B sau C 👇","ig_extra":"Colaborare cu OKX. Crypto e volatil, nu e sfat financiar.","hashtags":["#masina","#economii","#educatiefinanciara"],
+"scenes":[
+{"type":"story","enter":true,"narr":"Mihai vrea mașină · Ep. 3","mihai":"think","ana":"phone","say":[["ana","Gata, planul meu. Ești pregătit?"],["mihai","Zi-mi că nu e «mergi cu autobuzul»."]],"d":6},
+{"type":"story","mihai":"shrug","ana":"point","big":"10.000 €","big_color":"#2f9e5b","big_at":0.5,"say":[["ana","Iei o mașină second-hand de 10.000 €. Bună, verificată."],["mihai","Dar nu e roșie și nu strălucește…"]],"d":6},
+{"type":"story","mihai":"wow","ana":"smirk","big":"175 € / lună","big_color":"#2f9e5b","big_at":0.5,"say":[["ana","Rata scade la jumătate: cam 175 € pe lună."],["mihai","JUMĂTATE?!"]],"d":5.5},
+{"type":"story","mihai":"think","ana":"arms_up","prop":"jar_full","prop_at":1.8,"say":[["ana","Iar ceilalți *175 €* îi pui deoparte. Automat, în ziua salariului."]],"d":5.5},
+{"type":"story","mihai":"wow","ana":"point","big":"≈ 14.400 €","big_color":"#f08a00","big_at":1,"say":[["ana","În 6 ani pui 12.600 €. Cu dobândă, ajung la cam *14.400 €*."]],"disc":["Exemplu la 4,5% pe an (titluri de stat în euro, Fidelis noiembrie 2026).","Randamentele viitoare nu sunt garantate."],"d":6.5},
+{"type":"story","mihai":"think","ana":"phone","say":[["ana","Eu pun o parte și în *crypto*, cu cumpărare recurentă pe OKX. Mai mult risc, dar și mai mult potențial."]],"disc":["Colaborare cu OKX. Crypto e volatil, poți pierde bani.","Bonus de până la 400 € pentru conturi noi, se aplică condiții. Link-ul e în bio."],"d":6.5},
+{"type":"story","mihai":"arms_up","ana":"smirk","say":[["mihai","Deci după 6 ani am mașină ȘI 14.000 € strânși?"],["ana","Fix. 😏"]],"d":5},
+{"type":"kinetic","kicker":"MIHAI VREA MAȘINĂ","words":["Voi decideți","*finalul* 👇"],"size":110,"d":3},
+{"type":"question","char":"mihai/think","title":"Ce să aleagă","title2":"Mihai?","options":["mașina nouă, în rate","planul Anei","altceva (scrie-ne)"],"footer":"Votează în comentarii 👇"}]}

@@ -1,0 +1,7 @@
+{"account":"investeste-simplu","caption":"Ai 30 de ani și 0 lei economisiți? Nu e prea târziu, dar fiecare an contează 👀 La ce vârstă ai început tu? Scrie A, B, C sau D 👇","hashtags":["#economii","#bani","#educatiefinanciara"],
+"scenes":[
+{"type":"hook","title":"Ai 30 de ani","title2":"și 0 lei puși deoparte?","pose":"sad"},
+{"type":"text","title":"Nu ești singurul.","lines":["Dar fiecare an în care amâni","te costă mai mult decât crezi."],"pose":"think"},
+{"type":"grow","title":"300 lei pe lună, de la 30 la 60 de ani","sub":"pui în total 108.000 lei","from":0,"to":365991,"steps":30,"step_label":"Anul","note":"Exemplu cu randament ipotetic de 7% pe an. Nu e garantat.","d":7},
+{"type":"flow","title":"De unde începi:","boxes":["Fond de urgență","10% automat, lunar","Investiții pe termen lung"],"highlight":1,"jar":true},
+{"type":"question","title":"La ce vârstă","title2":"ai început tu?","options":["sub 25","25 - 30","după 30","încă n-am început"]}]}
