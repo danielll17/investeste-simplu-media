@@ -1,0 +1,149 @@
+{
+ "handle": "@investeste.simplu",
+ "episode": "Ion & Maria · O discuție la bucătărie",
+ "cast": [
+  "ion",
+  "maria"
+ ],
+ "slides": [
+  {
+   "title": "„Dacă începeam la 30 de ani…” <span class=\"accent\">Ion are 62. Asta regretă cel mai mult.</span>",
+   "narr": "O discuție pe care o au mulți părinți. Poate și ai tăi.",
+   "mihai": [
+    "worried",
+    "down"
+   ],
+   "ana": [
+    "think",
+    "down"
+   ]
+  },
+  {
+   "narr": "Seara, la bucătărie. La final te întreb ceva 👀",
+   "say": [
+    [
+     "l",
+     "Maria, știi ce mă roade? Am muncit 40 de ani și avem 12.000 de lei în bancă."
+    ],
+    [
+     "r",
+     "Măcar avem casa, Ioane."
+    ]
+   ],
+   "mihai": [
+    "worried",
+    "shrug"
+   ],
+   "ana": [
+    "think",
+    "down"
+   ]
+  },
+  {
+   "say": [
+    [
+     "l",
+     "Dacă puneam deoparte 300 de lei pe lună, de la 30 de ani…"
+    ],
+    [
+     "r",
+     "…ce-ar fi fost?"
+    ]
+   ],
+   "mihai": [
+    "think",
+    "down"
+   ],
+   "ana": [
+    "surprised",
+    "down"
+   ]
+  },
+  {
+   "say": [
+    [
+     "l",
+     "Am fi pus în total 115.000 de lei. Dar investiți, azi am fi avut aproape 430.000."
+    ],
+    [
+     "r",
+     "CÂT?!"
+    ]
+   ],
+   "narr": "Exemplu cu randament ipotetic de 7% pe an. Nu e garantat.",
+   "mihai": [
+    "worried",
+    "point"
+   ],
+   "ana": [
+    "surprised",
+    "down"
+   ]
+  },
+  {
+   "say": [
+    [
+     "r",
+     "Pe vremea aia nu știa nimeni de investiții."
+    ],
+    [
+     "l",
+     "Știu. Dar copiii noștri știu. Sau ar trebui să știe."
+    ]
+   ],
+   "mihai": [
+    "think",
+    "down"
+   ],
+   "ana": [
+    "worried",
+    "shrug"
+   ]
+  },
+  {
+   "say": [
+    [
+     "r",
+     "Hai să-i spunem lui Andrei. Are 28 de ani."
+    ],
+    [
+     "l",
+     "Și noi? Mai putem începe la 62?"
+    ]
+   ],
+   "mihai": [
+    "happy",
+    "down"
+   ],
+   "ana": [
+    "smirk",
+    "point"
+   ]
+  },
+  {
+   "title": "Cel mai bun moment era acum 30 de ani. <span class=\"accent\">Al doilea cel mai bun e azi.</span>",
+   "mihai": [
+    "happy",
+    "down"
+   ],
+   "ana": [
+    "happy",
+    "down"
+   ],
+   "narr": "Maria: „Mai bine acum decât niciodată.”"
+  },
+  {
+   "title": "Ce ai vrea să fi știut <span class=\"accent\">la 20 de ani?</span>",
+   "narr": "Scrie litera în comentarii 👇",
+   "opts": "<span class=\"accent\">A</span> să economisesc lunar<br><span class=\"accent\">B</span> să investesc devreme<br><span class=\"accent\">C</span> să nu iau credite<br><span class=\"accent\">D</span> să am fond de urgență",
+   "mihai": [
+    "think",
+    "down"
+   ],
+   "ana": [
+    "happy",
+    "down"
+   ]
+  }
+ ]
+}

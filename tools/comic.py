@@ -1,8 +1,9 @@
 import json, sys, pathlib
 from playwright.sync_api import sync_playwright
 
-SKIN = {"mihai": "#f1c7a3", "ana": "#e9b896"}
-SHIRT = {"mihai": "#3b82f6", "ana": "#8b5cf6"}
+SKIN = {"mihai": "#f1c7a3", "ana": "#e9b896", "ion": "#e8b994", "maria": "#efc3a2"}
+SHIRT = {"mihai": "#3b82f6", "ana": "#8b5cf6", "ion": "#8a5a3b", "maria": "#2f8f6b"}
+NAMES = {"mihai": "Mihai", "ana": "Ana", "ion": "Ion", "maria": "Maria"}
 DARK = "#1c1c22"
 
 def face(mood):
@@ -58,6 +59,18 @@ def arms(who, pose):
     return left + right
 
 def hair(who, back):
+    if who == "ion":
+        if back:
+            return ""
+        return ('<path d="M-92,-520 Q-100,-590 -70,-610 Q-80,-560 -60,-540Z M92,-520 Q100,-590 70,-610 Q80,-560 60,-540Z" fill="#c9c9c9"/>'
+                '<path d="M-38,-492 Q0,-470 38,-492 Q20,-478 0,-480 Q-20,-478 -38,-492Z" fill="#bdbdbd"/>'
+                '<path d="M-60,-600 q8,-6 16,0 M44,-600 q8,-6 16,0" stroke="#8a7f78" stroke-width="5" fill="none"/>')
+    if who == "maria":
+        if back:
+            return ('<path d="M-100,-560 Q-110,-470 -84,-450 L84,-450 Q110,-470 100,-560 Q92,-650 0,-650 Q-92,-650 -100,-560Z" fill="#cfcfcf"/>')
+        return ('<path d="M-90,-556 Q-66,-648 4,-642 Q70,-640 90,-556 Q50,-604 -6,-596 Q-50,-604 -90,-556Z" fill="#cfcfcf"/>'
+                '<circle cx="0" cy="-664" r="32" fill="#cfcfcf"/>'
+                '<g fill="none" stroke="#3a2a22" stroke-width="5"><circle cx="-30" cy="-545" r="22"/><circle cx="30" cy="-545" r="22"/><path d="M-8,-545 h16"/></g>')
     if who == "mihai":
         if back:
             return ""
@@ -127,15 +140,18 @@ svg{z-index:1;display:block;flex-shrink:0}
 .dot.on{background:#f7931a;width:40px;border-radius:7px}
 """
 
+CAST = ["mihai", "ana"]
+
 def scene(s):
     parts = ['<svg width="872" height="560" viewBox="0 0 872 560">',
              '<rect x="0" y="540" width="872" height="20" rx="10" fill="#1a1a21"/>']
     if s.get("tv"):
         parts.append(tv(436, 545))
     m, a = s.get("mihai"), s.get("ana")
+    L, R = CAST
     mx, ax = (170, 700) if s.get("tv") else (230, 650)
-    if m: parts.append(person("mihai", mx, 545, .8, m[0], m[1]))
-    if a: parts.append(person("ana", ax, 545, .8, a[0], a[1], flip=True))
+    if m: parts.append(person(L, mx, 545, .8, m[0], m[1]))
+    if a: parts.append(person(R, ax, 545, .8, a[0], a[1], flip=True))
     parts.append('</svg>')
     return "".join(parts)
 
@@ -154,7 +170,7 @@ def slide_html(s, i, n, spec, swipe_on):
         rows = "".join(f'<div class="row"><span>{k}</span><span class="{cls}">{v}</span></div>' for k, v, cls in c["rows"])
         talk.append(f'<div class="card"><div class="t">{c["t"]}</div><div class="v">{c["v"]}</div>{rows}</div>')
     for side, txt in s.get("say", []):
-        name = "Mihai" if side == "l" else "Ana"
+        name = NAMES[CAST[0]] if side == "l" else NAMES[CAST[1]]
         talk.append(f'<div class="b {side}"><span class="who">{name}</span>{txt}</div>')
     h.append(f'<div class="talk">{"".join(talk)}</div>')
     h.append(scene(s))
@@ -164,6 +180,8 @@ def slide_html(s, i, n, spec, swipe_on):
 
 def main(spec_path, out_dir, fmt="tt"):
     spec = json.loads(pathlib.Path(spec_path).read_text())
+    global CAST
+    CAST = spec.get("cast", ["mihai", "ana"])
     out = pathlib.Path(out_dir); out.mkdir(parents=True, exist_ok=True)
     sl = spec["slides"]
     with sync_playwright() as p:
