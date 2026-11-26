@@ -1,0 +1,86 @@
+{
+ "account": "investeste-simplu",
+ "caption": "Mâine e Black Friday. Înainte să bagi cardul, uită-te câte ore muncești de fapt pentru „reducere” 👀 Tu ce vrei să cumperi? Scrie A, B, C sau D 👇",
+ "hashtags": [
+  "#blackfriday",
+  "#bani",
+  "#educatiefinanciara"
+ ],
+ "scenes": [
+  {
+   "type": "kinetic",
+   "kicker": "MÂINE E BLACK FRIDAY",
+   "words": [
+    "Înainte să",
+    "cumperi,",
+    "*uită-te la asta.*"
+   ],
+   "size": 110,
+   "d": 3.5
+  },
+  {
+   "type": "text",
+   "title": "Salariul mediu net: *5.717 lei*",
+   "lines": [
+    "Adică aproximativ 34 de lei pe oră.",
+    "(INS, septembrie 2026)"
+   ],
+   "pose": "think"
+  },
+  {
+   "type": "clock",
+   "title": "Televizorul „la reducere”",
+   "item": "TV",
+   "price": 2400,
+   "hourly": 34,
+   "sub": "La 168 de ore lucrate pe lună."
+  },
+  {
+   "type": "clock",
+   "title": "Telefonul nou, -20%",
+   "item": "Telefon",
+   "price": 3500,
+   "hourly": 34
+  },
+  {
+   "type": "clock",
+   "title": "10 lucruri „doar 199 lei”",
+   "item": "Coșul",
+   "price": 1990,
+   "hourly": 34
+  },
+  {
+   "type": "text",
+   "title": "Regula de *Black Friday*:",
+   "lines": [
+    "L-ai cumpăra și la preț întreg?",
+    "Dacă nu, nu e reducere.",
+    "E o scuză."
+   ],
+   "pose": "idea"
+  },
+  {
+   "type": "question",
+   "title": "Tu ce cumperi",
+   "title2": "de Black Friday?",
+   "options": [
+    "electronice",
+    "haine",
+    "nimic, strâng bani",
+    "ce-mi trebuie, planificat"
+   ]
+  }
+ ],
+ "cover": {
+  "type": "kinetic",
+  "kicker": "BLACK FRIDAY",
+  "words": [
+   "Televizorul ăsta",
+   "te costă",
+   "*71 de ore*",
+   "de muncă."
+  ],
+  "size": 105,
+  "sub": "Fă calculul înainte să cumperi 👇"
+ }
+}

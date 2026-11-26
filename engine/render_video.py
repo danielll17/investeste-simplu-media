@@ -6,6 +6,10 @@ HERE = pathlib.Path(__file__).resolve().parent
 
 def render(spec_path, out, preview=False):
     spec = json.loads(pathlib.Path(spec_path).read_text())
+    # coperta dedicata: o scena scurta (4 cadre) pusa la inceput, desenata complet
+    if spec.get("cover"):
+        cv = dict(spec["cover"]); cv["d"] = 4 / FPS
+        spec["scenes"].insert(0, cv); spec["cover_t"] = 3.0
     work = pathlib.Path(tempfile.mkdtemp(prefix="vid_"))
     with sync_playwright() as p:
         kw = {"executable_path": os.environ["CHROME_PATH"]} if os.environ.get("CHROME_PATH") else {}
@@ -29,7 +33,7 @@ def render(spec_path, out, preview=False):
             cover_t = spec.get("cover_t", min(durs[0] - 0.3, 3.0))
             for k in range(n):
                 # primele cadre ale clipului = coperta (TikTok/Instagram iau primul cadru ca miniatura)
-                tt = cover_t if (i == 0 and k < 4) else k / FPS
+                tt = cover_t if (i == 0 and (k < 4 or spec.get("cover"))) else k / FPS
                 pg.evaluate(f"draw({i},{tt})")
                 ff.stdin.write(pg.screenshot(type="jpeg", quality=92))
             ff.stdin.close()
