@@ -1,0 +1,83 @@
+{
+ "account": "investeste-simplu",
+ "caption": "Dacă pierzi jobul mâine, câte luni reziști? Fii sincer 👀 Scrie A, B, C sau D 👇",
+ "hashtags": [
+  "#bani",
+  "#economii",
+  "#educatiefinanciara"
+ ],
+ "cover": {
+  "type": "kinetic",
+  "kicker": "ÎNTREBARE INCOMODĂ",
+  "words": [
+   "Dacă pierzi",
+   "jobul MÂINE,",
+   "câte luni",
+   "*reziști?*"
+  ],
+  "size": 110,
+  "sub": "Fă calculul în 30 de secunde 👇"
+ },
+ "scenes": [
+  {
+   "type": "hook",
+   "title": "Dacă pierzi jobul mâine…",
+   "title2": "câte luni reziști?",
+   "pose": "wallet"
+  },
+  {
+   "type": "text",
+   "title": "Mulți: *nici măcar o lună.*",
+   "lines": [
+    "Un salariu întârziat",
+    "și apare primul credit."
+   ],
+   "pose": "sad"
+  },
+  {
+   "type": "counter",
+   "title": "Cât te costă o lună",
+   "sub": "chirie, mâncare, facturi, transport",
+   "calc": "exemplu: 4.000 lei",
+   "add": 4000,
+   "total_label": "Pe lună",
+   "pose": "think",
+   "stamp": [
+    "3-6 luni de rezervă",
+    "= 12.000-24.000 lei"
+   ]
+  },
+  {
+   "type": "grow",
+   "title": "Cu 500 de lei pe lună",
+   "sub": "ai primele 3 luni acoperite în 2 ani",
+   "from": 0,
+   "to": 12000,
+   "steps": 24,
+   "step_label": "Luna",
+   "note": "Exemplu simplu, fără dobândă.",
+   "d": 6.5
+  },
+  {
+   "type": "flow",
+   "title": "Unde îl ții:",
+   "boxes": [
+    "Cont de economii sau depozit",
+    "Separat de cardul zilnic",
+    "Nu în acțiuni sau crypto"
+   ],
+   "highlight": 0
+  },
+  {
+   "type": "question",
+   "title": "Câte luni",
+   "title2": "ai rezista?",
+   "options": [
+    "niciuna",
+    "1 - 2",
+    "3 - 6",
+    "peste 6"
+   ]
+  }
+ ]
+}
