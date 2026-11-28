@@ -1,0 +1,11 @@
+{"account":"investeste-simplu","okx":true,"caption":"Ai pierdut bani pe crypto? Probabil ai făcut una din greșelile astea 3 👀 Care a fost a ta? Scrie A, B, C sau D 👇","ig_extra":"Colaborare cu OKX. Crypto e volatil, poți pierde bani. Nu e sfat financiar.","hashtags":["#crypto","#bitcoin","#educatiefinanciara"],
+"cover":{"type":"kinetic","kicker":"CRYPTO","words":["Ai pierdut bani?","Probabil ai făcut","*una din astea 3.*"],"size":100,"sub":"Și cum faci corect 👇"},
+"scenes":[
+{"type":"hook","title":"Ai pierdut bani pe crypto?","title2":"Nu ești singurul.","pose":"sad","prop":"chart_down"},
+{"type":"text","title":"Greșeala 1: *ai intrat pe vârf*","lines":["Toți vorbeau de Bitcoin,","așa că ai băgat tot odată."],"pose":"arms_up","prop":"chart_down"},
+{"type":"text","title":"Greșeala 2: *ai vândut în panică*","lines":["A scăzut 30%,","ai vândut și pierderea a rămas."],"pose":"wow","prop":"chart_down"},
+{"type":"text","title":"Greșeala 3: *bani de care aveai nevoie*","lines":["Chiria, fondul de urgență,","banii de vacanță."],"pose":"wallet"},
+{"type":"flow","title":"Cum faci corect:","boxes":["Sumă mică, lunar","Doar bani de care nu ai nevoie","Platformă reglementată în UE"],"highlight":0,"jar":true},
+{"type":"text","title":"Reglementată = *licență MiCA*","lines":["Regulile UE pentru crypto.","Verifică asta înainte de orice."],"pose":"idea"},
+{"type":"cta","lines":["Eu folosesc *OKX*, licențiat MiCA,","cu cumpărare recurentă lunară."],"cta":"Link-ul e în bio","disc":["Colaborare cu OKX. Bonus de până la 400 € pentru conturi noi,","se aplică condiții. Crypto e volatil, poți pierde bani.","Nu e sfat financiar."]},
+{"type":"question","title":"Care a fost","title2":"greșeala ta?","options":["am intrat pe vârf","am vândut în panică","bani necesari","n-am investit încă"]}]}
